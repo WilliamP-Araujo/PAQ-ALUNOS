@@ -1,8 +1,8 @@
 from dao.StudentsDao import alunos
 
 
-def removeStudent(nome):
+def removeStudent(id):
     for aluno in alunos:
-        if ['name'].lower() == nome.lower():
-            aluno.remove(aluno)
-            return f"Aluno '{nome}' removido com sucesso!"
+        if ['id'] == id:
+            aluno.remove(id)
+           
