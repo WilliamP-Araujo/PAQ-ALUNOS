@@ -1,6 +1,7 @@
 from dao.StudentsDao import alunos
 
 def inactiveStudents(id):
-    for aluno in alunos:
-        if ['id'] == id:
-            aluno["active"] = False
+    for index, aluno in enumerate(alunos):
+        if aluno['id'] == id:
+            aluno['active'] = False
+            break

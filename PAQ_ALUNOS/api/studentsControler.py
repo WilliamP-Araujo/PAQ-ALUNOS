@@ -28,13 +28,15 @@ def remove_aluno(id):
 
 @app.route('/alunos/<string:id>/inactive', methods=['PATCH'])
 def inactive_aluno(id):
-    inactiveStudentUseCase.inactiveStudent(id)
+    inactiveStudentUseCase.inactiveStudents(id)
     return f"Aluno {id} inativado com sucesso!"
 
 @app.route('/alunos/<string:id>', methods=['PUT'])
 def update_aluno(id,studentDto:studentUpdateDto.StudentDTO):
     updateStudentUseCase.updateStudent(id,studentDto)
     return f"Aluno {id} atualizado com sucesso!"
+
+
 
 
 if __name__ == '__main__':
