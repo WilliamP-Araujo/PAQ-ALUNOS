@@ -1,9 +1,10 @@
 
 from pydantic import BaseModel
 
-class StudentDTO(BaseModel):
+class StudentInsertDTO(BaseModel):
     name: str
     apelido: str
+    
     
 
 

@@ -1,13 +1,9 @@
 from flask import Flask, jsonify
 
-from usecases import findAllStudentsUseCase
-from usecases import findStudentsUseCase
-from usecases import removeStudentUseCase
-from usecases import inactiveStudentUseCase
-from usecases import updateStudentUseCase
-from dto import studentUpdateDto
 
-
+from usecases import updateStudentUseCase, insertStudentUseCase, inactiveStudentUseCase,removeStudentUseCase,findStudentsUseCase,findAllStudentsUseCase
+from dto import studentUpdateDto, studentInsertDto
+from flask_pydantic import validate
 
 
 app = Flask(__name__)
@@ -32,11 +28,16 @@ def inactive_aluno(id):
     return f"Aluno {id} inativado com sucesso!"
 
 @app.route('/alunos/<string:id>', methods=['PUT'])
-def update_aluno(id,studentDto:studentUpdateDto.StudentDTO):
-    updateStudentUseCase.updateStudent(id,studentDto)
+@validate()
+def update_aluno(id: str, body: studentUpdateDto.StudentDTO):
+    updateStudentUseCase.updateStudent(id,body)
     return f"Aluno {id} atualizado com sucesso!"
 
-
+@app.route('/alunos', methods=['POST'])
+@validate()
+def insert_aluno( body: studentInsertDto.StudentInsertDTO):
+    insertStudentUseCase.studentInsert(body)
+    return f"Aluno inserido com sucesso!"
 
 
 if __name__ == '__main__':
